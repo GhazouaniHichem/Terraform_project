@@ -1,0 +1,71 @@
+/*
+resource "aws_security_group" "myapp-sg" {
+  name = "myapp-sg"
+  vpc_id = aws_vpc.myapp-vpc.id
+
+  // incoming traffic
+  ingress {
+    from_port = 22
+    to_port = 22
+    protocol = "tcp"
+    cidr_blocks = [var.my_ip]
+  }
+  ingress {
+    from_port = 8080
+    to_port = 8080
+    protocol = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  //outgoing traffic
+  egress {
+    from_port = 0 //any port 0
+    to_port = 0
+    protocol = "-1" //any protocol -1
+    cidr_blocks = ["0.0.0.0/0"]
+    prefix_list_ids = [] // allowing access to any vpc
+  }
+  tags = {
+      Name: "${var.env_prefix}-sg"
+    }
+
+}
+*/
+
+
+
+/*
+//get the ami image ID automatically from aws with specified (filter)
+
+
+
+data "aws_ami" "latest-amazon-linux-image" {
+  most_recent = true
+  owners = ["amazon"]
+  filter {
+    name = "name"
+    values = ["amzn2-ami-hvm-*-x86_64-gp2"]
+  }
+  filter {
+    name = "virtualization-type"
+    values = ["hvm"]
+  }
+}
+
+// Then reference it in the "aws_instance" resource with:
+   ami = data.aws_ami.latest-amazon-linux-image.id
+
+*/
+
+/*
+// Create KEy-pair
+
+resource "aws_key_pair" "ssh-key" {
+  key_name = "server-key"
+  public_key = file(var.public_key_location)
+}
+
+// reference it : key_name = aws_key_pair.ssh-key.key_name
+
+
+*/
